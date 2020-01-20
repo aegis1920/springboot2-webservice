@@ -13,7 +13,7 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
-    @PutMapping("/api/v1/posts")
+    @PostMapping("/api/v1/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
         return postsService.save(requestDto);
     }
