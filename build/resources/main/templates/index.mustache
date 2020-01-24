@@ -4,6 +4,15 @@
     <div class="row">
         <div class="col-md-6">
             <a href="/posts/save" role="button" class="btn btn-primary">글 등록</a>
+            {{#originUserName}}
+            username : <span id="user">{{originUserName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/originUserName}}
+            {{^originUserName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+<!--               application-oauth.properties에 등록한 redirect_uri_template 값에 맞춰 자동으로 등록된다.-->
+                <a href="/oauth2/authorization/naver" class="btn btn-success active" role="button">Naver Login</a>
+            {{/originUserName}}
         </div>
     </div>
     <br>
