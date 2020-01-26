@@ -22,3 +22,6 @@ notifications:
   email:
     recipients:
       - aegis1920@gmail.com
+
+before_install:
+  - chmod +x gradlew
