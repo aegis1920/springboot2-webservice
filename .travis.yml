@@ -1,0 +1,24 @@
+language: java
+jdk:
+  - openjdk8
+
+# master 브랜치에 push될 때 실행
+branches:
+  only:
+    - master
+
+# Travis CI 서버의 home
+# 의존성들을 해당 디렉토리에 캐시해 다음 배포 때 다시 받지 않도록 설정
+cache:
+  directories:
+    - '$HOME/.m2/repository'
+    - '$HOME/.gradle'
+
+# push될 때 수행하는 스크립트
+script: ".gradlew clean build"
+
+# CI 실행 완료 시 메일로 알람
+notifications:
+  email:
+    recipients:
+      - aegis1920@gmail.com
