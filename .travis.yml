@@ -19,6 +19,7 @@ script: "./gradlew clean build"
 
 # deploy 명령어 실행 전 수행. CodeDeploy는 Jar를 못 읽기 때문에 zip으로 만들어준다.
 # mkdir -p 옵션은 그 자리에서 디렉토리 생성
+# Travis CI는 S3로 특정 파일만 업로드가 안된다. 디렉토리 별로 가능하기때문에 deploy 디렉토리에 zip파일을 이동시킨다.
 before_deploy:
   - mkdir -p before-deploy # zip에 포함시킬 파일을 담을 디렉토리 생성
   - cp scripts/*.sh before-deploy/
@@ -28,6 +29,7 @@ before_deploy:
   - cd ../ && mkdir -p deploy # 상위 디렉토리로 이동 후 deploy 디렉토리 생성
   - mv before-deploy/before-deploy.zip deploy/springboot2-webservice.zip # deploy로 zip 파일 이동
 
+# S3 또는 CodeDeploy 등 외부 서비스와 연동될 행위를 선언
 deploy:
   - provider: s3
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
@@ -36,7 +38,7 @@ deploy:
     region: ap-northeast-2
     skip_cleanup: true
     acl: private # zip 파일 접근을 private으로
-    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    local_dir: deploy # deploy 디렉토리를 지정. 해당 위치의 파일들만 S3로 전송
     wait-until-deployed: true
 
   - provider: codedeploy
