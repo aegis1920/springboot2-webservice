@@ -1,0 +1,8 @@
+# CodeDeploy의 버전.
+version: 0.0
+os: linux
+# 이동시킬 대상이 /(root)로 전부 다 하겠다는 말.
+files:
+  - source: /
+    destination: /home/ec2-user/app/step/zip
+    overwrite: yes
