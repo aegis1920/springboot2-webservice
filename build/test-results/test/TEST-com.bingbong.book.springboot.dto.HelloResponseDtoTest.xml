@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bingbong.book.springboot.dto.HelloResponseDtoTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-01-22T05:13:35" hostname="DESKTOP-EULFNB2" time="0.012">
+  <properties/>
+  <testcase name="testLombok" classname="com.bingbong.book.springboot.dto.HelloResponseDtoTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
