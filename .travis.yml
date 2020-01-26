@@ -17,11 +17,26 @@ cache:
 # push될 때 수행하는 스크립트
 script: "./gradlew clean build"
 
+# deploy 명령어 실행 전 수행. CodeDeploy는 Jar를 못 읽기 때문에 zip으로 만들어준다.
+# mkdir -p 옵션은 그 자리에서 디렉토리 생성
+before_deploy:
+  - zip -r springboot2-webservice *
+  - mkdir -p deploy
+  - mv springboot2-webservice.zip deploy/springboot2-webservice.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
+    secret_access_key: $AWS_SECRET_KEY # Travis repo settings에 설정된 값
+    bucket: springbootservice-build # s3 버켓
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: private # zip 파일 접근을 private으로
+    local_dir: deploy # before_deploy에서 생성한 디렉토리
+    wait-until-deployed: true
+
 # CI 실행 완료 시 메일로 알람
 notifications:
   email:
     recipients:
       - aegis1920@gmail.com
-
-before_install:
-  - chmod +x gradlew
