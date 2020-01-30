@@ -46,8 +46,7 @@ public class PostsApiControllerTest {
 
     private MockMvc mvc;
 
-    // 매번 테스트가 시작되기 전 MockMvc 인스턴스를 생성
-    @Before
+    @Before // -> 매번 테스트가 시작되기 전 MockMvc 인스턴스를 생성
     public void setup(){
         mvc = MockMvcBuilders
                 .webAppContextSetup(context)
@@ -55,7 +54,7 @@ public class PostsApiControllerTest {
                 .build();
     }
 
-    @After
+    @After // -> JUnit에서 단위 테스트가 끝날 때마다 수행되는 메소드. 보통 배포 전 전체 테스트를 수행할 때 테스트간 데이터 침범을 막기 위해 사용. 그러나 여러 테스트가 동시에 수행되면 H2에 데이터가 남아있어 실패할 수 있음.
     public void tearDown() throws Exception{
         postsRepository.deleteAll();
     }

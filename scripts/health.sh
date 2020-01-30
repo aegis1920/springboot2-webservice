@@ -15,7 +15,7 @@ sleep 10
 for RETRY_COUNT in {1..10}
 do
     RESPONSE=$(curl -s http://localhost:${IDLE_PORT}/profile)
-    UP_COUNT=$(echo ${RESPONSE} | grep 'real' | wc -l)
+    UP_COUNT=$(echo ${RESPONSE} | grep 'real' | wc -l) # grep 'real'을 통해 RESPONSE에서 'real'문자열이 있는 곳을 알아내고 wc -l을 통해 'real'이라는 문자열의 라인 수를 알아낸다.
 
     if [ ${UP_COUNT} -ge 1 ]
     then # up_count >= 1을 통해 real 문자열이 있는지 검증

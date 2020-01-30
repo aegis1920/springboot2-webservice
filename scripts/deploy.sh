@@ -33,6 +33,9 @@ chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
+# - nohup 실행 시 CodeDeploy는 무한 대기한다. 무한 대기를 해결하기 위해 nohup.out을 별도로 사용한다. 이렇게 하지 않으면 nohup 파일이 생기지 않고 CodeDeploy로그에 표준입출력이 출력된다.
+# - nohup이 끝나기 전까지 CodeDeploy도 끝나지 않는다.
+
 nohup java -jar \
         -Dspring.config.location=classpath:/application.properties,classpath:/application-real.properties,/home/ec2-user/app/application-oauth.properties,/home/ec2-user/app/application-real-db.properties \
         -Dspring.profiles.active=real \

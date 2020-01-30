@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
 @Component
-// HandlerMethodArgumentResolver는 조건에 맞는 메소드가 있다면 구현체가 지정한 값으로 해당 메소드의 파리미터로 넘길 수 있다.
+// HandlerMethodArgumentResolver는 조건에 맞는 메소드가 있다면 구현체가 지정한 값으로 해당 메소드의 파리미터로 넘길 수 있다. @RequestBody나 @PathVariable 어노테이션을 사용할 때 사용한다.
 public class LoginUserArgumentResolver implements HandlerMethodArgumentResolver {
 
     private final HttpSession httpSession;

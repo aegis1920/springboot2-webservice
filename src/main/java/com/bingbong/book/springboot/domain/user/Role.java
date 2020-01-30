@@ -5,7 +5,7 @@ import lombok.RequiredArgsConstructor;
 
 @Getter
 @RequiredArgsConstructor
-public enum Role {
+public enum Role { // ROLE_을 붙여야 Spring Security에서 인식한다.
     GUEST("ROLE_GUEST", "손님"),
     USER("ROLE_USER", "일반 사용자");
 

@@ -7,14 +7,14 @@ import com.bingbong.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor // -> @Autowired를 안 써줘도 되는 이유
 @RestController
 public class PostsApiController {
 
     private final PostsService postsService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestDto){
+    public Long save(@RequestBody PostsSaveRequestDto requestDto){ // 객체형태로 전달되기 때문에 @RequestBody로 받는다.
         return postsService.save(requestDto);
     }
 

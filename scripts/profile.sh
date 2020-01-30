@@ -6,12 +6,13 @@ function find_idle_profile()
 {
     # 현재 엔진엑스가 바라보고 있는 스프링 부트가 정상적으로 수행중인지 확인. 응답값이 HttpStatus로 받는다. 400 이상은 모두 예외로 real2를 현재 profile로
     # IDLE_PROFILE : 엔진엑스와 연결되지 않은 profile. 스프링 부트 프로젝트를 이 profile로 연결하기 위해 반환
+    # -s는 진행내역 출력하지 않음, -o는 해당 경로(dev/null을 통해 출력 버리기)로 출력, -w는 "%{}"와 함께 그 포맷으로 전송. 즉, http://localhost/profile로 response code를 받음
     RESPONSE_CODE=$(curl -s -o /dev/null -w "%{http_code}" http://localhost/profile)
-    if [ ${RESPONSE_CODE} -ge 400 ] # 400보다 크면
+    if [ ${RESPONSE_CODE} -ge 400 ] # 400보다 크면(client or server error라면)
     then
         CURRENT_PROFILE=real2
     else
-        CURRENT_PROFILE=$(curl -s http://localhost/profile)
+        CURRENT_PROFILE=$(curl -s http://localhost/profile) # 그 response string만 온다.
     fi
 
     if [ ${CURRENT_PROFILE} == real1 ]

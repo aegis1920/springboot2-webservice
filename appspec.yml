@@ -15,15 +15,15 @@ permissions:
     group: ec2-user
 
 hooks:
-  AfterInstall:
-    - location: stop.sh # nginx와 연결되어있지 않은 스프링 부트를 종료
+  AfterInstall: # 애플리케이션 구성할 때, 즉 ApplicationStart 전에 실행
+    - location: stop.sh # nginx와 연결되어있지 않은 실행중이던 스프링 부트를 종료
       timeout: 60
       runas: ec2-user
-  ApplicationStart:
+  ApplicationStart: # 중지된 서비스를 다시 시작할 때 사용
     - location: start.sh # 엔진엑스와 연결되어있지 않은 Port로 새 버전의 스프링부트로 시작
       timeout: 60
       runas: ec2-user
-  ValidateService:
+  ValidateService: # 배포가 성공적으로 완료됐는지 확인하는데 사용
     - location: health.sh # 새 스프링부트가 정상적으로 실행됐는지 확인
       timeout: 60
       runas: ec2-user

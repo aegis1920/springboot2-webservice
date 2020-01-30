@@ -21,7 +21,7 @@ public class ProfileController {
 
         String defaultProfile = profiles.isEmpty() ? "default" : profiles.get(0);
 
-        // real, real1, reeal2 중 하나라도 있다면 그 값을 반환한다.
+        // real, real1, real2 중 하나라도 있다면 그 값을 반환한다.
         return profiles.stream()
                 .filter(realProfiles::contains)
                 .findAny()

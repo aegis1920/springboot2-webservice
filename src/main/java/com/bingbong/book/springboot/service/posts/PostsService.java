@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RequiredArgsConstructor
+@RequiredArgsConstructor // -> Bean을 주입받을 때 `@Autowired`, `setter`, `생성자` 등의 방식이 있는데 가장 권장하는 것이 생성자 주입 방식이다. `@RequiredArgsConstructor`는 final이 선언된 모든 필드를 인자값으로 된 생성자를 만들어준다.
 @Service
 public class PostsService {
 
@@ -41,7 +41,7 @@ public class PostsService {
         return new PostsResponseDto(entity);
     }
 
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true) // -> `readOnly = true`를 주면 트랜잭션 범위는 유지하되, 조회 기능만 남겨두어 조회 속도가 개선된다.
     public List<PostsListResponseDto> findAllDesc(){
         return postsRepository.findAllDesc().stream()
                 .map(PostsListResponseDto::new)
